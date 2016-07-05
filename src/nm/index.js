@@ -1,6 +1,7 @@
 import TrackListView from "./view/TrackListView";
 
 const trackListView = new TrackListView();
+
 $(mainStart());
 
 function mainStart () {
@@ -9,6 +10,5 @@ function mainStart () {
     }).then(res => {
         $(document.body).append(trackListView.$element);
         trackListView.tracks=res.result.tracks;
-
     });
 }

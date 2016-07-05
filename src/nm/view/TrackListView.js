@@ -27,7 +27,7 @@ export default class TrackListView {
                         <a href=${track.mp3Url}>
                             <span>${track.name}</span>
                         </a>
-                      </li>`)
+                      </li>`);
         this.$element.append($li);
     }
 
