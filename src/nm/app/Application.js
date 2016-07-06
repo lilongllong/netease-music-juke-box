@@ -1,5 +1,4 @@
 import NJUAPplication from "../../nju/app/Application";
-
 import PlayListView from "../view/PlayListView";
 
 export default class Application extends NJUAPplication{

@@ -1,6 +1,14 @@
 import Application from "./app/Application";
+import ServiceClient from "./service/ServiceClient";
+
 function main()
 {
+    ServiceClient.getInstance().getUserPlayList().then(playlist => {
+        console.log(playlist);
+    });
+    ServiceClient.getInstance().getSpecificPlayList().then(playlist => {
+        console.log(playlist);
+    });
     const app = new Application("nju-app");
     $(document.body).append(app.$element);
     console.log(app);
