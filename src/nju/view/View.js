@@ -7,7 +7,8 @@ export default class View extends ManageObject
         super.init();
         this._subviews = [];
         this.$element = $(`<${this.getElementTag()}/>`);
-        if (this.id !== null){
+        if (this.id !== null)
+        {
             this.$element.attr("id", this.id);
         }
         this.$container = this.$element;
@@ -40,7 +41,7 @@ export default class View extends ManageObject
     }
 
 
-    addSubView(view)
+    addSubView(view, $container = this.$container)
     {
         if (view instanceof View)
         {
@@ -50,49 +51,44 @@ export default class View extends ManageObject
             }
             view._parent = this;
             this._subviews.push(view);
-            view.placeAt(this.$container);
+            view.placeAt($container);
         }
     }
 
-    addSubViews(views)
+    addSubViews(views, $container = this.$container)
     {
         if (Array.isArray(views)) // Array.isArray is only method
         {
             views.forEach(item => {
-                this.addSubView(item);
+                this.addSubView(item, $container);
             });
         }
     }
 
     removeSubView(view, neverUseAgain = false)
     {
-        if (view instanceof View)
+        const index = this._subviews.indexOf(view);
+        if (index !== -1)
         {
-            const index = this._subviews.indexOf(view);
-            if (index !== -1)
+            view._parent = null;
+            this._subviews.splice(index, 1);
+            if (neverUseAgain)
             {
-                view._parent = null;
-                this._subviews.splice(index, 1);
-                if (!neverUseAgain)
-                {
-                    view.$element.detach();    // detach and remove diff
-                }
-                else {
-                    view.$element.remove();
-                }
+                view.$element.remove();    // detach and remove diff
+            }
+            else
+            {
+                view.$element.detach();
             }
         }
     }
 
     removeAllSubViews(neverUseAgain = false)
     {
-        while (this._subviews.length >0)
+        while (this._subviews.length > 0)
         {
             this._removeSubView(this._subviews[0], neverUseAgain);// remove use while
         }
-        // this._subviews.map(item => {
-        //     this._removeSubView(item, neverUseAgain);
-        // });
     }
 
     removeFromParent()
@@ -106,7 +102,7 @@ export default class View extends ManageObject
     placeAt(target)
     {
         const $target =  (target instanceof jQuery ? target : $(target));
-        $target.append($this.$element);
+        $target.append(this.$element);
     }
 
     $(...args)
