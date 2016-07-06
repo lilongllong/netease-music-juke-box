@@ -4,15 +4,18 @@ export default class Application extends NJUAPplication{
     init()
     {
         super.init();
-        this.addStyleClass("nju-app");
+        this.addStyleClass("nm-app");
         this._initLayout();
     }
 
     _initLayout()
     {
         this.$element.append(`
-                <div class="header-container"></div>
-                <main></main>
+                <header></header>
+                <main>
+                    <aside></aside>
+                    <section class="content"></section>
+                </main>
                 <footer></footer>
             `);
     }
