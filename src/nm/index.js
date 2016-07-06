@@ -1,7 +1,7 @@
 import Application from "./app/Application";
 function main()
 {
-    const app = new Application("nju-application");
+    const app = new Application("nju-app");
     $(document.body).append(app.$element);
     console.log(app);
 }
