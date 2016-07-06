@@ -14,8 +14,16 @@ html, body
 
     > header {
         background: @nm-app-color;
+        color: white;
         width: 100%;
-        flex: 0 1 @nm-app-header-height;
+        flex: 0 0 @nm-app-header-height;
+
+        display: flex;
+        align-items: center;
+        > h1 {
+            display: block;
+            margin-left: 20px;
+        }
     }
 
     > main {
@@ -28,18 +36,20 @@ html, body
             flex: 0 1 @nm-app-sidebar-width;
             height:100%;
             border-right: 1px solid @nm-separate-color;
-
+            overflow-y: auto;
+            background: @nm-app-darker-bg;
         }
 
         > section {
             flex: 1 1 @nm-app-base-height;
+            overflow-y: auto;
         }
     }
 
     > footer {
-        flex: 0 1 @nm-app-footer-height;
+        flex: 0 0 @nm-app-footer-height;
         width: 100%;
-        background: #red;
+        background: @nm-app-darker-bg;
         border-top: 1px solid @nm-separate-color;
     }
 }

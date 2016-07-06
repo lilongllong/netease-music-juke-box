@@ -40,7 +40,7 @@ export default class View extends ManageObject
     }
 
 
-    addSubView(view)
+    addSubView(view, $container = this.$container)
     {
         if (view instanceof View)
         {
@@ -50,16 +50,16 @@ export default class View extends ManageObject
             }
             view._parent = this;
             this._subviews.push(view);
-            view.placeAt(this.$container);
+            view.placeAt($container);
         }
     }
 
-    addSubViews(views)
+    addSubViews(views, $container = this.$container)
     {
         if (Array.isArray(views)) // Array.isArray is only method
         {
             views.forEach(item => {
-                this.addSubView(item);
+                this.addSubView(item, $container);
             });
         }
     }
@@ -106,7 +106,7 @@ export default class View extends ManageObject
     placeAt(target)
     {
         const $target =  (target instanceof jQuery ? target : $(target));
-        $target.append($this.$element);
+        $target.append(this.$element);
     }
 
     $(...args)
