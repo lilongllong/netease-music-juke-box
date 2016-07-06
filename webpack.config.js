@@ -6,12 +6,13 @@ module.exports = {
     context: path.resolve(__dirname, "./src"),
     entry: {
         vendor: [ "jquery" ],
+        nju: ["./nju/resource/index.less"],
         nm: ["./nm/index.js", "./nm/resource/index.less"]
     },
     output: {
         path: "./assets",
         publicPath: "/assets",
-        filename: "/[name]/bundle.js"
+        filename: "[name]/bundle.js"
     },
     module: {
         loaders: [
