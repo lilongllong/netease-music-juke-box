@@ -7,7 +7,8 @@ export default class View extends ManageObject
         super.init();
         this._subviews = [];
         this.$element = $(`<${this.getElementTag()}/>`);
-        if (this.id !== null){
+        if (this.id !== null)
+        {
             this.$element.attr("id", this.id);
         }
         this.$container = this.$element;
@@ -66,33 +67,28 @@ export default class View extends ManageObject
 
     removeSubView(view, neverUseAgain = false)
     {
-        if (view instanceof View)
+        const index = this._subviews.indexOf(view);
+        if (index !== -1)
         {
-            const index = this._subviews.indexOf(view);
-            if (index !== -1)
+            view._parent = null;
+            this._subviews.splice(index, 1);
+            if (neverUseAgain)
             {
-                view._parent = null;
-                this._subviews.splice(index, 1);
-                if (!neverUseAgain)
-                {
-                    view.$element.detach();    // detach and remove diff
-                }
-                else {
-                    view.$element.remove();
-                }
+                view.$element.remove();    // detach and remove diff
+            }
+            else
+            {
+                view.$element.detach();
             }
         }
     }
 
     removeAllSubViews(neverUseAgain = false)
     {
-        while (this._subviews.length >0)
+        while (this._subviews.length > 0)
         {
             this._removeSubView(this._subviews[0], neverUseAgain);// remove use while
         }
-        // this._subviews.map(item => {
-        //     this._removeSubView(item, neverUseAgain);
-        // });
     }
 
     removeFromParent()

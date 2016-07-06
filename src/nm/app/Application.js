@@ -7,7 +7,7 @@ export default class Application extends NJUAPplication{
         super.init();
         this.addStyleClass("nm-app");
         this._initLayout();
-        this._initPlayList();
+        this._initPlayListView();
     }
 
     _initLayout()
@@ -22,14 +22,15 @@ export default class Application extends NJUAPplication{
             `);
     }
 
-    _initPlayList()
+    _initPlayListView()
     {
         this.playListView = new PlayListView("play-list");
-        this.addSubView(this.playListView, this.$container.find("> main > aside"));
+        this.addSubView(this.playListView, this.$("> main > aside"));
+//        this.addSubView(this.playListView, this.$container.find("> main > aside"));
     }
 
     run()
     {
-        console.log("netease music is now running ...");
+        console.log("Netease Music Webapp is now running ...");
     }
 }

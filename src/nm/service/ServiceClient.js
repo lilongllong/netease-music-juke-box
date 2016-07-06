@@ -1,15 +1,15 @@
-const appUrl = "http://music.163.com/api";
+const NM_API_URL = "http://music.163.com/api";
 
 export default class ServiceClient
 {
 
-    getUserPlayList(uid = "40652589")
+    getUserPlayLists(uid = "40652589")
     {
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: `${appUrl}/user/playlist`,
+                url: `${NM_API_URL}/user/playlist`,
                 data: {
-                    uid: uid,
+                    uid,
                     limit: 1000,
                     offset: 0
                 }
@@ -20,18 +20,18 @@ export default class ServiceClient
                 }
                 else
                 {
-                    reject("the request is faied");
+                    reject("Response with error code:" + res.code);
                 }
-            })
+            }, reject);
         });
     }
-    getSpecificPlayList(uid = "4000000")
+    getPlayListDetail(id = "4000000")
     {
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: `${appUrl}/playlist/detail`,
+                url: `${NM_API_URL}/playlist/detail`,
                 data: {
-                    id:uid
+                    id
                 }
             }).then(res => {
                 if (res.code === 200 )
@@ -40,14 +40,14 @@ export default class ServiceClient
                 }
                 else
                 {
-                    reject("the request is faied");
+                    reject("Response with error code:" + res.code);
                 }
-            })
+            }, reject);
         });
     }
 }
-let __instance = null;
 
+let __instance = null;
 ServiceClient.getInstance = function()
 {
     if (__instance === null)
