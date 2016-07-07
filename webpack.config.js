@@ -1,26 +1,29 @@
-const ExtractTextPlugin =  require("extract-text-webpack-plugin");
-const path = require("path");
+"use strict";
+
 const webpack = require("webpack");
+const path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-    context: path.resolve(__dirname, "./src"),
+    context: path.resolve("./src"),
+
     entry: {
         vendor: [ "jquery" ],
-        nm: ["./nm/index.js", "./nm/resource/index.less"]
+        nm: [ "./nm/index.js", "./nm/resource/index.less" ]
     },
+
     output: {
-        path: "./assets",
+        path: path.resolve("./assets"),
         publicPath: "/assets",
         filename: "[name]/bundle.js"
     },
+
     module: {
         loaders: [
             {
-                test:/\.js$/,
-                exclude: /{node_modules | bower_components}/,
-                loaders: [
-                    "babel-loader?sourceRoot=./src"
-                ]
+                test: /\.js$/,
+                exclude: "node_modules/",
+                loader: "babel-loader"
             },
             {
                 test: /\.less$/,
@@ -28,11 +31,11 @@ module.exports = {
             }
         ]
     },
+
     plugins: [
         new webpack.ProvidePlugin({
             "$": "jquery",
-            "jQuery": "jquery",
-            "window.$": "jquery"
+            "jQuery": "jquery"
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
@@ -40,5 +43,16 @@ module.exports = {
             minChunks: Infinity
         }),
         new ExtractTextPlugin("./[name]/resource/bundle.css")
-    ]
+    ],
+
+    devServer:
+    {
+        proxy: {
+            "/api/*": {
+                target: "http://music.163.com/",
+                host: "music.163.com",
+                secure: false
+            }
+        }
+    }
 };
