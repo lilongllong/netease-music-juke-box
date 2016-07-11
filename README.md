@@ -1,18 +1,29 @@
 # netease-music-juke-box
-## 1. 概述
-使用网易云音乐的API接口，实现网易云音乐的播放列表的webApp   
-使用es6语法，webpack，nodejs作为其实现。
+使用网易云音乐的API接口，实现网易云音乐的播放列表的webApp。   
+
+## 1. 技术概述
+> * HTML 5 / CSS 3
+* Webpack
+* Gulp
+* ES6 / ES7 / ES2015
+* Babel
+* jQuery
+* LESS
+* Font Icon
+
 ## 2. 安装
 ``` cmd
 
-git clone https://github.com/lilongllong/netease-music-juke-box.git
+git clone https://github.com/lilongllong/netease-music-juke-box.git;
 npm install
+/*未使用gulp和webpack的环境，需执行一下命令*/
+npm install -g gulp webpack webpack-dev-server;
 ```
 
 ## 3. 运行
 ### 3.1 启动
 ``` atom-cmd
-webpack-dev-server
+gulp dev
 
 ```
 ### 3.2 浏览器打开
