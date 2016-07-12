@@ -9,7 +9,7 @@ module.exports = {
 
     entry: {
         vendor: [ "jquery" ],
-        nm: [ "./nm/index.js", "./nm/resource/index.less" ]
+        nm: ["./nm/index.js", "./nm/resource/index.less" ]
     },
 
     output: {
@@ -22,7 +22,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                exclude: "node_modules/",
+                exclude: /node_modules/,
                 loader: "babel-loader"
             },
             {

@@ -1,6 +1,6 @@
-import View from "../../nju/view/View";
+import ListView from "../../nju/view/ListView";
 
-export default class PlayListView extends View
+export default class PlayListView extends ListView
 {
     init()
     {
@@ -8,8 +8,20 @@ export default class PlayListView extends View
         this.addStyleClass("nm-play-list-view");//tian jian qianzhui fangzhi chongtu
     }
 
-    getElementTag()
+    $createItem()
     {
-        return "ul";
+        const $li = super.$createItem();
+        $li.append(`
+            <span class="icon"></span>
+            <span class="text"></span>
+            `);
+        return $li;
     }
+
+    renderItem(item, $li)
+    {
+        super.renderItem(item, $li);
+        $li.children(".text").text(item.name);
+    }
+
 }
