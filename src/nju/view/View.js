@@ -30,7 +30,7 @@ export default class View extends ManageObject
         this.$element.addClass(...args);
     }
 
-    removeStyleClass()
+    removeStyleClass(...args)
     {
         this.$element.removeClass(...args);
     }

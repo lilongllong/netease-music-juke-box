@@ -39,7 +39,7 @@ export default class ListView extends View
             if (this._items.length > 0)
             {
                 this._items.splice(0, this._items.length);
-                this.$element.children("li").remove();
+                this.$container.children().remove();
             }
         }
         else
@@ -61,10 +61,10 @@ export default class ListView extends View
     addItem(item)
     {
         const itemType = this.getTypeOfItem(item);
-        const $li = this.$createItem(itemType);
+        const $item = this.$createItem(itemType);
         this.items.push(item);
-        this.renderItem(item, $li);
-        this.$element.append($li);
+        this.renderItem(item, $item);
+        this.$container.append($item);
     }
 
     renderItem(item, $li)
