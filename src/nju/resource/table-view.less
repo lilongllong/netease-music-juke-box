@@ -2,11 +2,22 @@
 {
     table-layout: fixed;
     border-collapse: collapse;
+
+    tr
+    {
+        cursor: default;
+
+        &.selected
+        {
+            color: @nju-section-color;
+            background: @nju-section-bg;
+        }
+    }
 }
 
 .nju-table-view.striped
 {
-    li:nth-child(2n)
+    tr:nth-child(2n + 1):not(.selected)
     {
         background: @nju-striped-color;
     }

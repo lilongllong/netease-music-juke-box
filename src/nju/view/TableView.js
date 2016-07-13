@@ -7,8 +7,6 @@ export default class TableView extends ListView
         super.init();
         this.removeStyleClass("nju-list-view");
         this.addStyleClass("nju-table-view striped");
-
-        this._initLayout();
     }
 
     _initLayout()
@@ -25,12 +23,7 @@ export default class TableView extends ListView
 
     getItemElemenTag()
     {
-        return "td";
-    }
-
-    renderItem(item, $item)
-    {
-
+        return "tr";
     }
 
     renderHeaderItem($headItem)
