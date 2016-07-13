@@ -39,8 +39,9 @@ export default class ServiceClient
         }
         catch (e)
         {
-            throw e;
+            console.error(e);
         }
+
         if (res.code === 200 )
         {
             return res.playlist;

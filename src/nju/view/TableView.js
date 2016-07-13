@@ -23,6 +23,11 @@ export default class TableView extends ListView
         this.$element.append(this.$container);
     }
 
+    getItemElemenTag()
+    {
+        return "td";
+    }
+
     renderItem(item, $item)
     {
 
@@ -36,11 +41,6 @@ export default class TableView extends ListView
     $createHeaderItem()
     {
         return this.$createNewItem();
-    }
-
-    $createNewItem(type = 0)
-    {
-        return $(`<tr/>`);
     }
 
     getElementTag()

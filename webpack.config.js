@@ -47,6 +47,7 @@ module.exports = {
 
     devServer:
     {
+        /* transit proxy 可以解决跨域请求的问题 将浏览器的请求经服务器发给target */
         proxy: {
             "/api/*": {
                 target: "http://music.163.com/",

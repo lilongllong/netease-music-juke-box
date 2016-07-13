@@ -12,18 +12,19 @@ export default class PlayTableView extends TableView
     renderItem(item, $item)
     {
         super.renderItem(item, $item);
-        $item.children(".name").text(item.name);
         let duration = "";
         if (typeof item.duration === "number")
         {
             duration = (item.duration / (60 * 1000 * 100)).toFixed(2).slice(-2)
-                        + ":" +
-                        ((item.duration / 1000) % 60 / 100).toFixed(2).slice(-2);
+            + ":" +
+            ((item.duration / 1000) % 60 / 100).toFixed(2).slice(-2);
         }
         else
         {
             duration = item.duration;
         }
+
+        $item.children(".name").text(item.name);
         $item.children(".time").text(duration);
         $item.children(".artists").text(item.artists.map(artist => artist.name).join(","));
         $item.children(".album").text(item.album.name);
