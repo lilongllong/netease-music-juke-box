@@ -1,4 +1,58 @@
-#track-table-view {
+.nm-track-table-view {
     table-layout: fixed;
     border-collapse: collapse;
+    width: 100%;
+// colgroup 可以实现单列居中对齐
+    tr
+    {
+        height: @nm-list-item-height;
+        padding-left: 8px;
+
+        > td
+        {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+    }
+
+    thead tr
+    {
+        border-bottom: 1px solid @nm-separate-color;
+
+        > td:not(:first-child)
+        {
+            border-left: 1px solid @nm-separate-color;
+        }
+
+        > td.artists
+        {
+            width: 300px;
+        }
+
+        > td.time
+        {
+            width: 100px;
+        }
+
+        > td.album
+        {
+            width: 300px;
+        }
+    }
+
+    tbody
+    {
+
+    }
+}
+
+.nm-track-table-view.striped
+{
+    tr:nth-child(2n + 1)
+    {
+        background: @nju-striped-color;
+    }
 }
