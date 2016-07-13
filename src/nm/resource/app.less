@@ -10,7 +10,9 @@ html, body
     flex-direction: column;
 
     > header, > footer, > main > .content, > main > .sidebar {
+        display: flex;
         position: relative;
+        flex-shrink: 0;
     }
 
     > header {

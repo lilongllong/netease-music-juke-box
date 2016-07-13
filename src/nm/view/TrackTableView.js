@@ -1,4 +1,5 @@
 import TableView from "../../nju/view/TableView";
+import TimeUtil from "../util/TimeUtil";
 
 export default class PlayTableView extends TableView
 {
@@ -6,25 +7,14 @@ export default class PlayTableView extends TableView
     {
         super.init();
         /* class 添加前缀nm避免冲突  */
-        this.addStyleClass("nm-play-table-view");
+        this.addStyleClass("nm-track-table-view striped");
     }
 
     renderItem(item, $item)
     {
         super.renderItem(item, $item);
         $item.children(".name").text(item.name);
-        let duration = "";
-        if (typeof item.duration === "number")
-        {
-            duration = (item.duration / (60 * 1000 * 100)).toFixed(2).slice(-2)
-                        + ":" +
-                        ((item.duration / 1000) % 60 / 100).toFixed(2).slice(-2);
-        }
-        else
-        {
-            duration = item.duration;
-        }
-        $item.children(".time").text(duration);
+        $item.children(".time").text(TimeUtil.formateTime(item.duration));
         $item.children(".artists").text(item.artists.map(artist => artist.name).join(","));
         $item.children(".album").text(item.album.name);
     }
@@ -32,12 +22,10 @@ export default class PlayTableView extends TableView
     renderHeaderItem($headerItem)
     {
         super.renderHeaderItem($headerItem);
-        this.renderItem({
-            name: "歌曲标题",
-            duration: "时长",
-            artists: [{name: "歌手"}],
-            album: {name: "专辑"}
-        }, $headerItem);
+        $headerItem.children(".name").text("歌曲标题");
+        $headerItem.children(".time").text("时长");
+        $headerItem.children(".artists").text("歌手");
+        $headerItem.children(".album").text("专辑");
 
     }
 
