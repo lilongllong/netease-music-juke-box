@@ -7,7 +7,7 @@ export default class ListView extends View
         super.init();
         this._items = [];
         this._$itemTemplates = [];
-        this.addStyleClass("nju-list-view");//tian jian qianzhui fangzhi chongtu
+        this.addStyleClass("nju-list-view striped");//tian jian qianzhui fangzhi chongtu
     }
 
     getElementTag()
