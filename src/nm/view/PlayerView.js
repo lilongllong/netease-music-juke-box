@@ -5,6 +5,6 @@ export default class PlayerView extends View
     init()
     {
         super.init();
-        this.addStyleClass("nm-player-view");//tian jian qianzhui fangzhi chongtu
+        this.addStyleClass("nm-player-view");
     }
 }

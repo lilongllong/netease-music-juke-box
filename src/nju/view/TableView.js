@@ -21,7 +21,7 @@ export default class TableView extends ListView
         this.$element.append(this.$container);
     }
 
-    getItemElemenTag()
+    getItemElementTag()
     {
         return "tr";
     }

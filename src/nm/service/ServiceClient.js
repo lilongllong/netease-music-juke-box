@@ -79,6 +79,7 @@ export default class ServiceClient
         {
             throw e;
         }
+        
         if (res.code === 200 )
         {
             return res.result;

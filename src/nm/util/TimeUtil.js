@@ -22,3 +22,18 @@ function _digt2(num)
         return "0" + num;
     }
 }
+
+/* 毫秒 转换函数
+let duration = "";
+if (typeof item.duration === "number")
+{
+    duration = (item.duration / (60 * 1000 * 100)).toFixed(2).slice(-2)
+    + ":" +
+    ((item.duration / 1000) % 60 / 100).toFixed(2).slice(-2);
+}
+else
+{
+    duration = item.duration;
+}
+
+*/

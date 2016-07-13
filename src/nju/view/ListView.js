@@ -10,7 +10,7 @@ export default class ListView extends View
         this._$itemTemplates = [];
         this.addStyleClass("nju-list-view");//tian jian qianzhui fangzhi chongtu
         this._initLayout();
-        this.$container.on("click", this.getItemElemenTag(), this._onclick.bind(this));
+        this.$container.on("click", this.getItemElementTag(), this._onclick.bind(this));
     }
 
     _initLayout()
@@ -23,7 +23,7 @@ export default class ListView extends View
         return "ul";
     }
 
-    getItemElemenTag()
+    getItemElementTag()
     {
         return "li";
     }
@@ -67,7 +67,7 @@ export default class ListView extends View
             if (this._items.length > 0)
             {
                 this._items.splice(0, this._items.length);
-                this.$container.children(this.getItemElemenTag()).remove();
+                this.$container.children(this.getItemElementTag()).remove();
             }
         }
         else
@@ -137,7 +137,7 @@ export default class ListView extends View
 
     $createNewItem(itemType = 0)
     {
-        return $(`<${this.getItemElemenTag()}/>`);
+        return $(`<${this.getItemElementTag()}/>`);
     }
 
     $getItem(item)

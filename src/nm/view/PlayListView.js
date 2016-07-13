@@ -5,23 +5,23 @@ export default class PlayListView extends ListView
     init()
     {
         super.init();
-        this.addStyleClass("nm-play-list-view");//tian jian qianzhui fangzhi chongtu
+        this.addStyleClass("nm-play-list-view");
     }
 
     $createItem()
     {
-        const $li = super.$createItem();
-        $li.append(`
+        const $item = super.$createItem();
+        $item.append(`
             <span class="icon"></span>
             <span class="text"></span>
             `);
-        return $li;
+        return $item;
     }
 
-    renderItem(item, $li)
+    renderItem(item, $item)
     {
-        super.renderItem(item, $li);
-        $li.children(".text").text(item.name);
+        super.renderItem(item, $item);
+        $item.children(".text").text(item.name);
     }
 
 }

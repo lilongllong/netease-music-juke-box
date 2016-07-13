@@ -57,7 +57,7 @@ export default class View extends ManageObject
 
     addSubViews(views, $container = this.$container)
     {
-        if (Array.isArray(views)) // Array.isArray is only method
+        if (Array.isArray(views))
         {
             views.forEach(item => {
                 this.addSubView(item, $container);
@@ -74,7 +74,7 @@ export default class View extends ManageObject
             this._subviews.splice(index, 1);
             if (neverUseAgain)
             {
-                view.$element.remove();    // detach and remove diff
+                view.$element.remove();
             }
             else
             {
@@ -87,7 +87,7 @@ export default class View extends ManageObject
     {
         while (this._subviews.length > 0)
         {
-            this._removeSubView(this._subviews[0], neverUseAgain);// remove use while
+            this._removeSubView(this._subviews[0], neverUseAgain);
         }
     }
 
