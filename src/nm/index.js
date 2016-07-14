@@ -1,4 +1,4 @@
-import Application from "./app/Application";
+import ApplicationController from "./app/ApplicationController";
 import ServiceClient from "./service/ServiceClient";
 
 function main()
@@ -9,9 +9,9 @@ function main()
     // ServiceClient.getInstance().getPlayListDetail().then(playlist => {
     //     console.log(playlist);
     // });
-    const app = new Application("nm-app");
-    app.placeAt(document.body);
-    app.run();
+    const appController = new ApplicationController("nm-app");
+    appController.view.placeAt(document.body);
+    appController.run();
 }
 
 $(main);

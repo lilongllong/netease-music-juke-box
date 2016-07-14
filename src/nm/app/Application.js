@@ -1,7 +1,7 @@
 import NJUAPplication from "../../nju/app/Application";
+
 import PlayerView from "../view/PlayerView";
 import PlayListView from "../view/PlayListView";
-import ServiceClient from "../service/ServiceClient";
 import TrackTableView from "../view/TrackTableView";
 
 export default class Application extends NJUAPplication{
@@ -45,26 +45,4 @@ export default class Application extends NJUAPplication{
         this.addSubView(this.trackTableView, this.$("> main > section.content"));
     }
 
-    async run()
-    {
-        // pseudo login -UserId
-        // refresh playlist
-        //by default, select the first play to show trackTableListView
-        //by default, playerView select the first song of selected playList.
-        try
-        {
-            await ServiceClient.getInstance().login();
-            this.playListView.items = await ServiceClient.getInstance().getUserPlayLists();
-            this.playListView.selection = this.playListView.items[0];
-            
-            const playlist =  await ServiceClient.getInstance().getPlayListDetail(this.playListView.items[0].id);
-            this.trackTableView.items = playlist.tracks;
-
-        }
-        catch (e)
-        {
-            console.error(e);
-        }
-
-    }
 }
