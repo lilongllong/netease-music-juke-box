@@ -28,18 +28,18 @@ export default class ManageObject
 
         get eventEmitter()
         {
-
+            return this._eventEmitter;
         }
 
         on(type, listener)
         {
-            this.EventEmitter.on(type,listener);
+            this.eventEmitter.on(type, listener);
             return this;
         }
 
         off(type, listener)
         {
-            this.EventEmitter.off(type,listener);
+            this.eventEmitter.off(type, listener);
             return this;
         }
 
