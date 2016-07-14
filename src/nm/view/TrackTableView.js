@@ -8,6 +8,10 @@ export default class PlayTableView extends TableView
         super.init();
         /* class 添加前缀nm避免冲突  */
         this.addStyleClass("nm-track-table-view striped");
+        this.$container.on("dblclick", this.getItemElementTag(), () => {
+            this.trigger("activeTrack");
+            console.log("db");
+        });
     }
 
     renderItem(item, $item)
@@ -40,4 +44,5 @@ export default class PlayTableView extends TableView
             </tr>
             `);
     }
+
 }

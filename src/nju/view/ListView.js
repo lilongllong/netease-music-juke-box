@@ -36,6 +36,7 @@ export default class ListView extends View
     set items(items)
     {
 
+        this.clearItems();
         this._items = items;
         this.addItems(this._items);
     }
@@ -43,6 +44,11 @@ export default class ListView extends View
     get selection()
     {
         return this._selection;
+    }
+
+    get selectedId()
+    {
+        return this.getIdOfItem(this.selection);
     }
 
     set selection(value)
@@ -57,11 +63,19 @@ export default class ListView extends View
 
     getIdOfItem(item)
     {
-        return item.id;
+        if (item.id)
+        {
+            return item.id;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     clearItems()
     {
+        this.selection = null;
         if (this._items !== null)
         {
             if (this._items.length > 0)
@@ -112,7 +126,7 @@ export default class ListView extends View
             $item.addClass("selected");
         }
 
-        this.trigger("sectionchanged");
+        this.trigger("selectionchanged");
     }
 
 
@@ -153,6 +167,5 @@ export default class ListView extends View
         const $item = $(e.currentTarget);
         const item = $item.data("item");
         this.selectItem(item);
-        console.log(item.name);
     }
 }
