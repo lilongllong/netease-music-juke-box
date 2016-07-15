@@ -50,6 +50,23 @@ export default class ListView extends View
     {
         return this.getIdOfItem(this.selection);
     }
+    set selectedId(value = null)
+    {
+        if (value === null)
+        {
+            this.selection = null;
+        }
+        else
+        {
+
+        }
+
+        const $item = this.$getItem(value);
+        if ($item.length > 0)
+        {
+            this.selection = item;
+        }
+    }
 
     set selection(value)
     {
@@ -124,9 +141,9 @@ export default class ListView extends View
         {
             const $item = this.$getItem(item);
             $item.addClass("selected");
+            this.trigger("selectionchanged");
         }
 
-        this.trigger("selectionchanged");
     }
 
 
