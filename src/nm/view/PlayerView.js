@@ -31,14 +31,15 @@ export default class PlayerView extends View
         else
         {
             this.$container.empty();
-            this.$container.append(track.name);
+            this.$container.append(this.$createNewContent(track));
         }
     }
 
     $createNewContent(track)
     {
-        const $content = $(`<div class="music-operation"></div>
-                            <div class="music-process">${track.name}</div>
-                            <div class="music-like"></div>`);
+        const $content = $(`<div class="track-operation"></div>
+                            <div class="track-process">${track.name}</div>
+                            <div class="track-like"></div>`);
+        return $content;
     }
 }
