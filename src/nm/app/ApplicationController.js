@@ -53,21 +53,23 @@ export default class ApplicationController extends NJUApplication
 
     createApplication(options)
     {
-        const application = new Application();
+        return new Application();
+    }
 
-        this.playerView = application.playerView;
+    initView(options)
+    {
+        super.initView(options);
+        this.playerView = this.application.playerView;
 
-        this.playListView = application.playListView;
+        this.playListView = this.application.playListView;
         this.playListView.on("selectionchanged", this._playLists_selectionchanged.bind(this));
 
-        this.searchView = application.searchView;
+        this.searchView = this.application.searchView;
         this.searchView.on("search", this._searchView_search.bind(this));
         this.searchView.on("itemclick", this._searchView_itemclick.bind(this));
 
-        this.trackTableView = application.trackTableView;
+        this.trackTableView = this.application.trackTableView;
         this.trackTableView.on("activeTrack", this._trackTable_selectionchanged.bind(this));
-
-        return application;
     }
 
     async run()
