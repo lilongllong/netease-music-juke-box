@@ -90,45 +90,6 @@ export default class ServiceClient
         }
     }
 
-    async search(keyword,)
-    {
-        let res = null;
-
-        try
-        {
-            res = await $.ajax({
-                    "url": `${NM_API_URL}/search/get/`, //url: "/api/search/suggest/web",
-                    method: "post",
-                    data: {
-                        s: keyword,
-                        type: 1,
-                        offset: 0,
-                        limit: 100,
-                        sub: false
-                    }
-                });
-        } catch (e) {
-
-        } finally {
-
-        }
-
-        if (res)
-        {
-            res = JSON.parse(res);
-        }
-
-        if (res.code === 200 )
-        {
-            return res.result;
-        }
-        else
-        {
-            throw new Error("Response with error code:" + res.code);
-        }
-
-    }
-
     async search(keyword, suggest = false)
     {
         let res = null;
@@ -146,10 +107,10 @@ export default class ServiceClient
                         sub: false
                     }
                 });
-        } catch (e) {
-
-        } finally {
-
+        }
+        catch (e)
+        {
+            console.error("请求失败");
         }
 
         if (res)
@@ -157,9 +118,17 @@ export default class ServiceClient
             res = JSON.parse(res);
         }
 
-        if (res.code === 200 )
+        if (res.code === 200)
         {
-            return res.result.songs;
+            if (res.result.songs)
+            {
+                return res.result.songs;
+            }
+            else
+            {
+                return null;
+            }
+
         }
         else
         {

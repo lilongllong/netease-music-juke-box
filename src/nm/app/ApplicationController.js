@@ -62,7 +62,7 @@ export default class ApplicationController extends NJUApplication
 
         this.searchView = application.searchView;
         this.searchView.on("search", this._searchView_search.bind(this));
-        this.searchView.on("suggest", this._searchView_suggest.bind(this));
+        this.searchView.on("itemclick", this._searchView_itemclick.bind(this));
 
         this.trackTableView = application.trackTableView;
         this.trackTableView.on("activeTrack", this._trackTable_selectionchanged.bind(this));
@@ -147,12 +147,19 @@ export default class ApplicationController extends NJUApplication
             id : "search",
             tracks: songs
         };
-
+        this.searchView.hideSuggestion();
     }
 
-    async _searchView_suggest(e)
+    async _searchView_itemclick(e)
     {
-        const suggestionList = await ServiceClient.getInstance().search(this.searchView.text, true);
-        console.log(suggestionList);
+        const name = e.parameters.item.name;
+        this.searchView.text = name;
+        this.searchView.hideSuggestion();
+        this.searchView.suggestionView.items =await ServiceClient.getInstance().search(this.searchView.text, true);
+        const songs = await ServiceClient.getInstance().search(this.searchView.text);
+        this.activePlayList = {
+            id : "search",
+            tracks: songs
+        };
     }
 }

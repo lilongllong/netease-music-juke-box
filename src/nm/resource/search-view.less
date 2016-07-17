@@ -1,10 +1,14 @@
-#search {
+.nm-search-view {
+    @nm-search-view-height: 24px;
+    @nm-search-view-width: 240px;
+
+
+    position: relative;
     background-color: white;
     border-radius: 12px;
-    width: 300px;
-    height: 24px;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    height: @nm-search-view-height;
+    padding-top: 2px;
+    padding-bottom: 4px;
     padding-left: 8px;
     padding-right: 8px;
     margin-left: 160px;
@@ -12,21 +16,49 @@
     .icon-search
     {
         color: gray;
-
+        margin-top: 2px;
+        margin-right: 6px;
     }
 
-    input[type="search"]
+    input[type=search]
     {
         height: 16px;
-        border: none;
-        background: transparent;
+        width: @nm-search-view-width;
         width: 200px;
+        border: none;
         margin: 0;
-        margin-left: 8px;
+        padding: 0;
+        background: transparent;
 
 
     }
 
+    #suggestion-list-view
+    {
+        position: absolute;
+        background-color: @body-bg;
+        margin-top: 10px;
+        left: 0;
+        right: 0;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        border-radius: 4px;
+        z-index: 1;
+        li
+        {
+            height: @nm-list-item-height;
+            line-height: @nm-list-item-height;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            padding-left: 8px;
+            padding-right: 8px;
 
-
+            &:hover
+            {
+                background: #f3f3f3;
+            }
+        }
+    }
 }

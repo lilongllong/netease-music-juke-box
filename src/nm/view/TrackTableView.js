@@ -22,7 +22,7 @@ export default class PlayTableView extends TableView
         let duration = 0;
         if (item.lMusic)
         {
-            duration = item.lMusic.duration;
+            duration = item.lMusic.playTime;
         }
         else
         {

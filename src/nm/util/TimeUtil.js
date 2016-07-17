@@ -1,7 +1,16 @@
 export default class TimeUtil
 {
-    static formateTime(ms)
+    static formateTime(msInput)
     {
+        let ms = 0;
+        if (typeof msInput !== "number")
+        {
+            ms = parseInt(msInput);
+        }
+        else
+        {
+            ms = msInput;
+        }
         const msCount = ms % 1000;
         const sCount = (ms - msCount) / 1000;
         const sNum = sCount % 60;
