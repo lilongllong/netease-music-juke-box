@@ -43,7 +43,7 @@ export default class ApplicationController extends ViewController
 
     createApplication(options = {})
     {
-        throw new Error("...");
+        throw new Error("creatApplication must be inited");
     }
 
     run()
