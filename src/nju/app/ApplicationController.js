@@ -43,7 +43,7 @@ export default class ApplicationController extends ViewController
 
     createApplication(options = {})
     {
-        return new Application();
+        throw new Error("...");
     }
 
     run()
