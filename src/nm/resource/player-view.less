@@ -5,21 +5,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    > div
+    {
+        height: @nm-app-footer-height;
+    }
 
-    > .music-operation
+    > .track-btns
     {
         flex: 0 0 100px;
         background-color: #7687b8;
     }
 
-    > .music-process
+    > .track-icon
     {
-        flex: 0 0 400px;
+        flex: 0 0 50px;
     }
 
-    > .music-like
+    > .track-process
     {
         flex: 0 0 200px;
         background-color: red;
+    }
+
+    > .track-share
+    {
+        flex: 0 0 100px;
+        background: blue;
+    }
+
+    > .track-setting
+    {
+        flex: 0 0 100px;
+        background: green;
     }
 }
