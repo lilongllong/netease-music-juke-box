@@ -1,8 +1,10 @@
 import NJUAPplication from "../../nju/app/Application";
+
 import PlayerView from "../view/PlayerView";
 import PlayListView from "../view/PlayListView";
-import ServiceClient from "../service/ServiceClient";
+import SearchViewController from "../view/SearchViewController";
 import TrackTableView from "../view/TrackTableView";
+
 
 export default class Application extends NJUAPplication{
     init()
@@ -10,8 +12,9 @@ export default class Application extends NJUAPplication{
         super.init();
         this.addStyleClass("nm-app");
         this._initLayout();
-        this._initPlayListView();
         this._initPlayerView();
+        this._initPlayListView();
+        this._initSearchViewController();
         this._initTrackTableView();
     }
 
@@ -27,16 +30,23 @@ export default class Application extends NJUAPplication{
             `);
     }
 
+    _initPlayerView()
+    {
+        this.playerView = new PlayerView("player-view");
+        this.addSubView(this.playerView, this.$("> footer"));
+    }
+
     _initPlayListView()
     {
         this.playListView = new PlayListView("play-list-view");
         this.addSubView(this.playListView, this.$("> main > aside.sidebar"));
     }
 
-    _initPlayerView()
+    _initSearchViewController()
     {
-        this.playerView = new PlayerView("player-view");
-        this.addSubView(this.playerView, this.$("> footer"));
+        this.SearchViewController = new SearchViewController();
+        this.searchView = this.SearchViewController.view;
+        this.addSubView(this.searchView, this.$("> header"));
     }
 
     _initTrackTableView()
@@ -45,26 +55,4 @@ export default class Application extends NJUAPplication{
         this.addSubView(this.trackTableView, this.$("> main > section.content"));
     }
 
-    async run()
-    {
-        // pseudo login -UserId
-        // refresh playlist
-        //by default, select the first play to show trackTableListView
-        //by default, playerView select the first song of selected playList.
-        try
-        {
-            await ServiceClient.getInstance().login();
-            this.playListView.items = await ServiceClient.getInstance().getUserPlayLists();
-            this.playListView.selection = this.playListView.items[0];
-            
-            const playlist =  await ServiceClient.getInstance().getPlayListDetail(this.playListView.items[0].id);
-            this.trackTableView.items = playlist.tracks;
-
-        }
-        catch (e)
-        {
-            console.error(e);
-        }
-
-    }
 }

@@ -8,13 +8,27 @@ export default class PlayTableView extends TableView
         super.init();
         /* class 添加前缀nm避免冲突  */
         this.addStyleClass("nm-track-table-view striped");
+        this.$container.on("dblclick", this.getItemElementTag(), () => {
+            this.trigger("activeTrack");
+        });
     }
 
     renderItem(item, $item)
     {
         super.renderItem(item, $item);
         $item.children(".name").text(item.name);
-        $item.children(".time").text(TimeUtil.formateTime(item.duration));
+
+        let duration = 0;
+        if (item.lMusic)
+        {
+            duration = item.lMusic.playTime;
+        }
+        else
+        {
+            duration = item.duration;
+        }
+        $item.children(".time").text(TimeUtil.formateTime(duration));
+
         $item.children(".artists").text(item.artists.map(artist => artist.name).join(","));
         $item.children(".album").text(item.album.name);
     }
@@ -40,4 +54,5 @@ export default class PlayTableView extends TableView
             </tr>
             `);
     }
+
 }

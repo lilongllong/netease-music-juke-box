@@ -2,6 +2,7 @@ import ManageObject  from "../base/ManageObject";
 
 export default class View extends ManageObject
 {
+
     init()
     {
         super.init();
@@ -18,6 +19,7 @@ export default class View extends ManageObject
     {
         return "div";
     }
+
 
     get subview()
     {

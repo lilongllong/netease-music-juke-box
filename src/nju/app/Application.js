@@ -1,30 +1,39 @@
 import View from "../view/View";
 // module env variabel
-window.$app = null;
+
 
 export default class Application extends View{
+
+    static _instance = null;
 
     constructor(...args)
     {
         super(...args);
-        if (window.$app === null)
+        /*
+        全局只有一个Application  多New的会报错
+        */
+        if (Application._instance === null)
         {
-            window.$app = this;
+            Application._instance = this;
         }
         else
         {
-            throw new Error("application is APP_SINGLETON and  It only construced once");
+            throw new Error("Application is APP_SINGLETON and it only construced once.");
         }
+    }
+
+    static getInstance()
+    {
+        if (Application._instance === null)
+        {
+            throw new Error("Application has not been instantiated yet.");
+        }
+        return Application._instance;
     }
 
     init()
     {
         super.init();
         this.addStyleClass("nju-app");
-    }
-
-    run()
-    {
-
     }
 }

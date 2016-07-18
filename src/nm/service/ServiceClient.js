@@ -79,7 +79,7 @@ export default class ServiceClient
         {
             throw e;
         }
-        
+
         if (res.code === 200 )
         {
             return res.result;
@@ -88,5 +88,52 @@ export default class ServiceClient
         {
             throw new Error("Response with error code:" + res.code);
         }
+    }
+
+    async search(keyword, suggest = false)
+    {
+        let res = null;
+
+        try
+        {
+            res = await $.ajax({
+                    "url": suggest ? `${NM_API_URL}/search/suggest/web` : `${NM_API_URL}/search/get/`,
+                    method: "post",
+                    data: {
+                        s: keyword,
+                        type: 1,
+                        offset: 0,
+                        limit: 100,
+                        sub: false
+                    }
+                });
+        }
+        catch (e)
+        {
+            console.error("请求失败");
+        }
+
+        if (res)
+        {
+            res = JSON.parse(res);
+        }
+
+        if (res.code === 200)
+        {
+            if (res.result.songs)
+            {
+                return res.result.songs;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+        else
+        {
+            throw new Error("Response with error code:" + res.code);
+        }
+
     }
 }
