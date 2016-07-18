@@ -108,7 +108,7 @@ export default class ApplicationController extends NJUApplication
         {
             if (this.activePlayList.id && this.activePlayList.id === "search")
             {
-                this.playListView.selectItem(null);
+                this.playListView.selection = null;
             }
             this.trackTableView.items = this.activePlayList.tracks;
         }
