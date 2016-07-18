@@ -36,9 +36,8 @@ export default class ListView extends View
     set items(items)
     {
 
-        this.clearItems();
+        this.prepareItems(items);
         this._items = items;
-        this.addItems(this._items);
     }
 
     get selection()
@@ -55,10 +54,6 @@ export default class ListView extends View
         if (value === null)
         {
             this.selection = null;
-        }
-        else
-        {
-
         }
 
         const $item = this.$getItem(value);
@@ -90,6 +85,34 @@ export default class ListView extends View
         }
     }
 
+    prepareItems(items = null)
+    {
+        if (items && items.length && items.length === 0)
+        {
+            this.clearItems();
+            return;
+        }
+        const $items = this.$getItems();
+        let length = items.length - this.items.length;
+        items.forEach((item, index) => {
+            /* 先不判断item类型是否相等 */
+            if((index + 1) > this.items.length)
+            {
+                this.addItem(item);
+            }
+            else
+            {
+                $($items[index]).removeClass("selected");
+                this.renderItem(item, $($items[index]));
+            }
+        });
+    }
+
+    $getItems()
+    {
+        return this.$container.children(this.getItemElementTag());
+    }
+
     clearItems()
     {
         this.selection = null;
@@ -107,23 +130,12 @@ export default class ListView extends View
         }
     }
 
-    addItems(items)
-    {
-        if (items && items.length)
-        {
-            items.forEach(item => {
-                this.addItem(item);
-            });
-        }
-    }
-
     addItem(item)
     {
         const itemType = this.getTypeOfItem(item);
         const $item = this.$createItem(itemType);
-        this.items.push(item);
         this.renderItem(item, $item);
-        this.$container.append($item);
+        this.$container.append($item)
     }
 
     selectItem(item = null)
@@ -155,11 +167,6 @@ export default class ListView extends View
     {
         this.addStyleClass("hide-selection");
     }
-
-
-
-
-
 
     renderItem(item, $item)
     {
