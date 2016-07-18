@@ -10,7 +10,6 @@ export default class PlayTableView extends TableView
         this.addStyleClass("nm-track-table-view striped");
         this.$container.on("dblclick", this.getItemElementTag(), () => {
             this.trigger("activeTrack");
-            console.log("db");
         });
     }
 
