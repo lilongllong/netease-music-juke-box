@@ -92,8 +92,16 @@ export default class ListView extends View
             this.clearItems();
             return;
         }
+
         const $items = this.$getItems();
-        let length = items.length - this.items.length;
+        let length = this.items.length;
+        const newLength = items.length;
+
+        while(length > newLength)
+        {
+            $($items[length - 1]).remove();
+            length--;
+        }
         items.forEach((item, index) => {
             /* 先不判断item类型是否相等 */
             if((index + 1) > this.items.length)
