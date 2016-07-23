@@ -1,4 +1,5 @@
 import View from "../../nju/view/View";
+import TimeUtil from "../util/TimeUtil";
 
 export default class PlayerView extends View
 {
@@ -14,60 +15,71 @@ export default class PlayerView extends View
     {
         this.initTrackBtnsView();
         this.initTrackIconView();
-        this.initTrackPlayView();
+        this.initTrackProcessView();
         this.initTrackShareView();
         this.initTrackSettingView();
+        this.initTrackPlayer();
     }
 
     initTrackBtnsView()
     {
         this.$btnsView = $(`<div class="track-btns">
-                                    <span class="prev"></span>
-                                    <span class="play"></span>
-                                    <span class="next"></span>
+                                    <span class="prev iconfont icon-previous"></span>
+                                    <span class="play iconfont icon-play"></span>
+                                    <span class="next iconfont icon-next"></span>
                                 </div>`);
         this.$container.append(this.$btnsView);
     }
 
     initTrackIconView()
     {
-        this.$iconView = $(`<div class="track-icon"><span class="icon"></span></div>`);
+        this.$iconView = $(`<div class="track-icon"><img></span></div>`);
         this.$container.append(this.$iconView);
     }
 
-    initTrackPlayView()
+    initTrackProcessView()
     {
-        this.$playView = $(`<div class="track-play">
+        this.$trackProcessView = $(`<div class="track-process">
                                     <div class="head">
-                                        <span id="track-name"></span>
-                                        <span id="track-artist"></span>
+                                        <a class="track-name"></a>
+                                        <a class="track-artist"></a>
                                     </div>
                                     <div class="foot">
-                                        <div class="track-process"><div>
-                                        <span class="track-time"></span>
+                                        <div class="track-process"></div>
+                                        <div class="track-time">00:00/00:00</div>
                                     </div>
                                 </div>`);
-        this.$container.append(this.$playView);
+        this.$container.append(this.$trackProcessView);
     }
 
     initTrackShareView()
     {
         this.$shareView = $(`<div class="track-share">
-                                    <a class="favorite">收藏</a>
-                                    <a class="share">分享</a>
+                                    <a class="favorite iconfont icon-favorite"></a>
+                                    <a class="share iconfont icon-share"></a>
                                 </div>`)
         this.$container.append(this.$shareView);
     }
 
     initTrackSettingView()
     {
-        this.$settingView = $(`<div class="track-setting">相关设置</div>`);
+        this.$settingView = $(`<div class="track-setting">
+                                    <a class="track-volume iconfont icon-soundplus"></a>
+                                    <a></a>
+                                    <a></a>
+                            </div>`);
         this.$container.append(this.$settingView);
+    }
+
+    initTrackPlayer()
+    {
+        this.$trackPlayer = $('<audio class="music-player"></audio>');
+        this.$container.append(this.$trackPlayer);
     }
 
     get track()
     {
-
+        return this._track;
     }
     set track(track)
     {
@@ -75,20 +87,46 @@ export default class PlayerView extends View
         {
             this._track = track;
             this.render(track);
+            console.log(track);
         }
     }
 
     render(track)
     {
-        if (track === null)
+        if (track)
         {
-            this.$container.empty();
+            let duration = 0;
+            if (track.lMusic)
+            {
+                duration = track.lMusic.playTime;
+            }
+            else
+            {
+                duration = track.duration;
+            }
+
+            this.$trackPlayer.attr("src", track.mp3Url);
+            this.$iconView.children("img").attr("src", track.album.blurPicUrl);
+            this.$trackProcessView.children(".head").children(".track-name").text(track.name);
+            this.$trackProcessView.children(".head").children(".track-artist").text(track.artists.map(artist => artist.name).join(","));
+            this.$trackProcessView.children(".foot").children(".track-time").text("00:00/" + TimeUtil.formateTime(duration));
+
         }
-        else
-        {
-            this.$container.empty();
-            this.$container.append(this.$createNewContent(track));
-        }
+    }
+
+    playTrack()
+    {
+        this.$trackPlayer[0].play();
+    }
+
+    pauseTrack()
+    {
+        this.$trackPlayer[0].pause();
+    }
+
+    playNextTrack(track)
+    {
+        this.track = track;
     }
 
 }
