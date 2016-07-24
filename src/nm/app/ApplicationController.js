@@ -59,7 +59,7 @@ export default class ApplicationController extends NJUApplication
     initView(options)
     {
         super.initView(options);
-        this.playerView = this.application.playerView;
+        this.playerViewController = this.application.playerViewController;
 
         this.playListView = this.application.playListView;
         this.playListView.on("selectionchanged", this._playLists_selectionchanged.bind(this));
@@ -123,11 +123,11 @@ export default class ApplicationController extends NJUApplication
     {
         if (this.activeTrack)
         {
-            this.playerView.track = this.activeTrack;
+            this.playerViewController.track = this.activeTrack;
         }
         else
         {
-            this.playerView.track = null;
+            this.playerViewController.track = null;
         }
     }
 
