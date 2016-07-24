@@ -43,4 +43,4 @@ audio播放状态控制存在缺陷，
 播放时间和进度条的自动更新未实现
 
 ## 5 运行截图
-![缺少图片](https://github.com/lilongllong/netease-music-juke-box/blob/develop/img/netease%20music.png);
+![缺少图片](https://github.com/lilongllong/netease-music-juke-box/blob/develop/img/netease-music.png);
