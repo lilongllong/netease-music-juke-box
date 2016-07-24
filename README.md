@@ -39,3 +39,5 @@ netease-music-juke-box
 ## 4.缺陷
 
 audio无法实现跨域，待解决
+audio播放状态控制存在缺陷，
+播放时间和进度条的自动更新未实现

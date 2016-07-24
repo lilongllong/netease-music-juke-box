@@ -59,8 +59,6 @@ export default class PlayerController extends ViewController
         if (this.playState)
         {
             this.view.$trackPlayer[0].play();
-            console.log(this.view.$trackPlayer[0]);
-
         }
         else
         {
