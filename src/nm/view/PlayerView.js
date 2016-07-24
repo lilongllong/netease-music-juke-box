@@ -6,7 +6,6 @@ export default class PlayerView extends View
     init()
     {
         super.init();
-        this._track = null;
         this.addStyleClass("nm-player-view");
         this.initLayout();
     }
@@ -23,12 +22,15 @@ export default class PlayerView extends View
 
     initTrackBtnsView()
     {
-        this.$btnsView = $(`<div class="track-btns">
+        this.$trackBtnsView = $(`<div class="track-btns">
                                     <span class="prev iconfont icon-previous"></span>
                                     <span class="play iconfont icon-play"></span>
                                     <span class="next iconfont icon-next"></span>
                                 </div>`);
-        this.$container.append(this.$btnsView);
+        this.$trackBtnsView.children(".prev").on("click", this._TracksBtnsView_prevclick.bind(this));
+        this.$trackBtnsView.children(".next").on("click", this._TracksBtnsView_nextclick.bind(this));
+        this.$trackBtnsView.children(".play").on("click", this._TracksBtnsView_playclick.bind(this));
+        this.$container.append(this.$trackBtnsView);
     }
 
     initTrackIconView()
@@ -50,15 +52,18 @@ export default class PlayerView extends View
                                     </div>
                                 </div>`);
         this.$container.append(this.$trackProcessView);
+
     }
 
     initTrackShareView()
     {
-        this.$shareView = $(`<div class="track-share">
+        this.$trackShareView = $(`<div class="track-share">
                                     <a class="favorite iconfont icon-favorite"></a>
                                     <a class="share iconfont icon-share"></a>
                                 </div>`)
-        this.$container.append(this.$shareView);
+        this.$trackShareView.children(".favorite").on("click", this._TrackShareView_favoriteclick.bind(this));
+        this.$trackShareView.children(".share").on("click", this._TrackShareView_shareclick.bind(this));
+        this.$container.append(this.$trackShareView);
     }
 
     initTrackSettingView()
@@ -73,22 +78,9 @@ export default class PlayerView extends View
 
     initTrackPlayer()
     {
-        this.$trackPlayer = $('<audio class="music-player"></audio>');
+        this.$trackPlayer = $(`<audio class="music-player" controls="controls" autoplay>
+                </audio>`);
         this.$container.append(this.$trackPlayer);
-    }
-
-    get track()
-    {
-        return this._track;
-    }
-    set track(track)
-    {
-        if (track !== this._track)
-        {
-            this._track = track;
-            this.render(track);
-            console.log(track);
-        }
     }
 
     render(track)
@@ -105,7 +97,7 @@ export default class PlayerView extends View
                 duration = track.duration;
             }
 
-            this.$trackPlayer.attr("src", track.mp3Url);
+            this.$trackPlayer.attr("src", "assets/music/test.mp3");
             this.$iconView.children("img").attr("src", track.album.blurPicUrl);
             this.$trackProcessView.children(".head").children(".track-name").text(track.name);
             this.$trackProcessView.children(".head").children(".track-artist").text(track.artists.map(artist => artist.name).join(","));
@@ -114,19 +106,32 @@ export default class PlayerView extends View
         }
     }
 
-    playTrack()
+
+
+    _TracksBtnsView_prevclick(e)
     {
-        this.$trackPlayer[0].play();
+        this.trigger("previous");
     }
 
-    pauseTrack()
+    _TracksBtnsView_playclick(e)
     {
-        this.$trackPlayer[0].pause();
+        this.trigger("play-toggle");
     }
 
-    playNextTrack(track)
+    _TracksBtnsView_nextclick(e)
     {
-        this.track = track;
+        this.trigger("next");
     }
+
+    _TrackShareView_favoriteclick(e)
+    {
+        this.trigger("favorite");
+    }
+
+    _TrackShareView_shareclick(e)
+    {
+        this.trigger("share");
+    }
+
 
 }

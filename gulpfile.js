@@ -16,6 +16,8 @@ gulp.task("clean", cb => {
 
 
 gulp.task("dist", [ "clean" ], cb => {
+    gulp.src("./src/cache/test.mp3")
+    .pipe(gulp.dest("assets/music"));
     webpack(require("./webpack.config-dist.js"), (err, stats) => {
         if (err) throw new gutil.PluginError("webpack", err);
         gutil.log("[webpack]", stats.toString());
@@ -26,6 +28,8 @@ gulp.task("dist", [ "clean" ], cb => {
 gulp.task("dev", [ "clean" ], cb => {
     const config = require("./webpack.config.js");
     const compiler = webpack(config);
+    gulp.src("./src/cache/test.mp3")
+    .pipe(gulp.dest("assets/music"));
 
     new WebpackDevServer(compiler, {
         publicPath: config.output.publicPath,
