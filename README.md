@@ -35,3 +35,7 @@ gulp dev
 [http://localhost:8080](http://localhost:8080);
 
 netease-music-juke-box
+
+## 4.缺陷
+
+audio无法实现跨域，待解决
