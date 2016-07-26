@@ -1,5 +1,6 @@
 # netease-music-juke-box
-使用网易云音乐的API接口，实现网易云音乐的播放列表的webApp。   
+高仿网易云音乐
+使用网易云音乐的API接口，实现网易云音乐的播放列表, 搜索, 播放器功能的webApp。   
 
 ## 1. 技术概述
 > * HTML 5 / CSS 3
