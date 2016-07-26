@@ -171,7 +171,6 @@ export default class ApplicationController extends NJUApplication
 
     _player_next_track(e)
     {
-        console.log(this.trackTableView.items);
         const index = this.trackTableView.items.indexOf(this.activeTrack);
         if (index >= 0 && index < (this.trackTableView.items.length - 1))
         {
