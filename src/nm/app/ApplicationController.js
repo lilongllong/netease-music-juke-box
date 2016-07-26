@@ -59,7 +59,11 @@ export default class ApplicationController extends NJUApplication
     initView(options)
     {
         super.initView(options);
-        this.playerView = this.application.playerView;
+        this.playerViewController = this.application.playerViewController;
+        this.playerViewController.on("previous-track", this._player_previous_track.bind(this));
+        this.playerViewController.on("next-track", this._player_next_track.bind(this));
+        this.playerViewController.on("favorite", this._player_favorite_track.bind(this));
+        this.playerViewController.on("share", this._player_share_track.bind(this));
 
         this.playListView = this.application.playListView;
         this.playListView.on("selectionchanged", this._playLists_selectionchanged.bind(this));
@@ -123,11 +127,11 @@ export default class ApplicationController extends NJUApplication
     {
         if (this.activeTrack)
         {
-            this.playerView.track = this.activeTrack;
+            this.playerViewController.track = this.activeTrack;
         }
         else
         {
-            this.playerView.track = null;
+            this.playerViewController.track = null;
         }
     }
 
@@ -163,5 +167,34 @@ export default class ApplicationController extends NJUApplication
             id : "search",
             tracks: songs
         };
+    }
+
+    _player_next_track(e)
+    {
+        console.log(this.trackTableView.items);
+        const index = this.trackTableView.items.indexOf(this.activeTrack);
+        if (index >= 0 && index < (this.trackTableView.items.length - 1))
+        {
+            this.activeTrack = this.trackTableView.items[index + 1];
+        }
+    }
+
+    _player_previous_track(e)
+    {
+        const index = this.trackTableView.items.indexOf(this.activeTrack);
+        if (index > 0 && index < this.trackTableView.items.length)
+        {
+            this.activeTrack = this.trackTableView.items[index - 1];
+        }
+    }
+
+    _player_share_track(e)
+    {
+        alert("sorry! 该功能尚未实现");
+    }
+
+    _player_favorite_track(e)
+    {
+        alert("sorry! 该功能尚未实现");
     }
 }

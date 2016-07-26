@@ -5,7 +5,14 @@ export default class TimeUtil
         let ms = 0;
         if (typeof msInput !== "number")
         {
-            ms = parseInt(msInput);
+            if (msInput !== null)
+            {
+                ms = parseInt(msInput);
+                if (isNaN(ms))
+                {
+                    ms = 0;
+                }
+            }
         }
         else
         {

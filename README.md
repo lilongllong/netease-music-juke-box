@@ -35,3 +35,12 @@ gulp dev
 [http://localhost:8080](http://localhost:8080);
 
 netease-music-juke-box
+
+## 4.缺陷
+
+audio无法实现跨域，待解决
+audio播放状态控制存在缺陷，
+播放时间和进度条的自动更新未实现
+
+## 5 运行截图
+![缺少图片](https://github.com/lilongllong/netease-music-juke-box/blob/develop/img/netease-music.png);

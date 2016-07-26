@@ -1,6 +1,6 @@
 import NJUAPplication from "../../nju/app/Application";
 
-import PlayerView from "../view/PlayerView";
+import PlayerViewController from "../view/PlayerViewController";
 import PlayListView from "../view/PlayListView";
 import SearchViewController from "../view/SearchViewController";
 import TrackTableView from "../view/TrackTableView";
@@ -12,7 +12,7 @@ export default class Application extends NJUAPplication{
         super.init();
         this.addStyleClass("nm-app");
         this._initLayout();
-        this._initPlayerView();
+        this._initPlayerViewController();
         this._initPlayListView();
         this._initSearchViewController();
         this._initTrackTableView();
@@ -21,7 +21,7 @@ export default class Application extends NJUAPplication{
     _initLayout()
     {
         this.$element.append(`
-                <header><h1>易听音乐站</h1></header>
+                <header><h1>网易云音乐</h1></header>
                 <main>
                     <aside class="sidebar"></aside>
                     <section class="content"></section>
@@ -30,10 +30,10 @@ export default class Application extends NJUAPplication{
             `);
     }
 
-    _initPlayerView()
+    _initPlayerViewController()
     {
-        this.playerView = new PlayerView("player-view");
-        this.addSubView(this.playerView, this.$("> footer"));
+        this.playerViewController = new PlayerViewController();
+        this.addSubView(this.playerViewController.view, this.$("> footer"));
     }
 
     _initPlayListView()
