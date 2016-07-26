@@ -30,9 +30,7 @@ export default class ServiceClient
 
     async __pseudoLogin()
     {
-        //77680183 40652589
-        this._userId = "40652589";
-
+        this._userId = "77680183";
     }
 
     async getUserPlayLists(uid = this._userId)
