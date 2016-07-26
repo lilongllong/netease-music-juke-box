@@ -38,3 +38,4 @@ netease-music-juke-box
 
 ## 4 运行截图
 ![缺少图片](https://github.com/lilongllong/netease-music-juke-box/blob/master/img/netease-music.png?raw=true);
+![缺少图片](https://github.com/lilongllong/netease-music-juke-box/blob/master/img/netease-music-li.png?raw=true);
