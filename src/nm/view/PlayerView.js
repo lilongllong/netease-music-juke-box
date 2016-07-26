@@ -47,12 +47,16 @@ export default class PlayerView extends View
                                         <a class="track-artist"></a>
                                     </div>
                                     <div class="foot">
-                                        <div class="track-process"></div>
+                                        <div class="track-process">
+                                            <div class="bg"></div>
+                                            <div class="process">
+                                                <span class="point iconfont icon-circle"></span>
+                                            </div>
+                                        </div>
                                         <div class="track-time">00:00/00:00</div>
                                     </div>
                                 </div>`);
         this.$container.append(this.$trackProcessView);
-
     }
 
     initTrackShareView()
@@ -78,8 +82,8 @@ export default class PlayerView extends View
 
     initTrackPlayer()
     {
-        this.$trackPlayer = $(`<audio class="music-player" controls="controls" autoplay>
-                </audio>`);
+        this.$trackPlayer = $(`<audio class="music-player" src="" controls="controls">
+                                </audio>`);
         this.$container.append(this.$trackPlayer);
     }
 
@@ -98,15 +102,24 @@ export default class PlayerView extends View
             }
 
             this.$trackPlayer.attr("src", "assets/music/test.mp3");
+            this.$trackPlayer.attr("src", track.mp3Url);
             this.$iconView.children("img").attr("src", track.album.blurPicUrl);
             this.$trackProcessView.children(".head").children(".track-name").text(track.name);
             this.$trackProcessView.children(".head").children(".track-artist").text(track.artists.map(artist => artist.name).join(","));
             this.$trackProcessView.children(".foot").children(".track-time").text("00:00/" + TimeUtil.formateTime(duration));
-
         }
     }
 
-
+    renderTrackTime(currentTime, duration)
+    {
+        this.$trackProcessView.children(".foot").children(".track-time").text(TimeUtil.formateTime(currentTime) + "/" + TimeUtil.formateTime(duration));
+        let process = 0;
+        if (duration !== 0)
+        {
+            process = Math.round(currentTime * 100 / duration);
+        }
+        this.$trackProcessView.children(".foot").children(".track-process").children(".process").css("width", process + "%");
+    }
 
     _TracksBtnsView_prevclick(e)
     {
@@ -132,6 +145,4 @@ export default class PlayerView extends View
     {
         this.trigger("share");
     }
-
-
 }

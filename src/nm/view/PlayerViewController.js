@@ -18,6 +18,7 @@ export default class PlayerController extends ViewController
         this.view.on("next", this._onNext.bind(this));
         this.view.on("favorite", this._onFavorite.bind(this));
         this.view.on("share", this._onShare.bind(this));
+        this.updateTrackTime();
     }
 
     get track()
@@ -28,10 +29,10 @@ export default class PlayerController extends ViewController
     {
         if (track !== this._track)
         {
+            this.playState = false;
             this._track = track;
-            this.playState = true;
             this.view.render(track);
-            console.log(track);
+            this.playState = true;
         }
     }
 
@@ -56,13 +57,16 @@ export default class PlayerController extends ViewController
 
     togglePlayer()
     {
-        if (this.playState)
+        if (this.playState !== this.view.$trackPlayer[0].played)
         {
-            this.view.$trackPlayer[0].play();
-        }
-        else
-        {
-            this.view.$trackPlayer[0].pause();
+            if (this.playState)
+            {
+                this.view.$trackPlayer[0].play();
+            }
+            else
+            {
+                this.view.$trackPlayer[0].pause();
+            }
         }
     }
 
@@ -73,6 +77,18 @@ export default class PlayerController extends ViewController
             this.view.$trackBtnsView.children(".play").toggleClass("icon-play");
             this.view.$trackBtnsView.children(".play").toggleClass("icon-pause");
         }
+    }
+
+    updateTrackTime()
+    {
+        setInterval(() => {
+            if (this.view.$trackPlayer.attr("src") !== "" && !this.view.$trackPlayer[0].paused)
+            {
+                const curTime = isNaN(this.view.$trackPlayer[0].currentTime) ? 0 : this.view.$trackPlayer[0].currentTime * 1000;
+                const duration = isNaN(this.view.$trackPlayer[0].duration) ? 0 : this.view.$trackPlayer[0].duration * 1000;
+                this.view.renderTrackTime(curTime, duration);
+            }
+        }, 200);
     }
 
     _onPrevious(e)
