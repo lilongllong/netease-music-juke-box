@@ -16,9 +16,10 @@
 ``` cmd
 
 git clone https://github.com/lilongllong/netease-music-juke-box.git;
-npm install
+npm install //若不起作用，请使用npm install -dev
 /*未使用gulp和webpack的环境，需执行一下命令*/
 npm install -g gulp webpack webpack-dev-server;
+
 ```
 
 ## 3. 运行
@@ -31,7 +32,7 @@ gulp dev
 
 #### 浏览器预设置
 需要跨域访问，调整浏览器的访问模式
-"XXX\chrome.exe" ---args --disable-web-security --user-data-dir
+<font size=4>"XXX\chrome.exe" ---args --disable-web-security --user-data-dir</font>
 #### 访问地址
 [http://localhost:8080](http://localhost:8080);
 
